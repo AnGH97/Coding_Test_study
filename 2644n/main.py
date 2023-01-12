@@ -13,7 +13,6 @@ for _ in range(m):
 def dfs(s, num):
     num += 1
     visited[s] = 1
-
     if s == b:
         res.append(num)
 
