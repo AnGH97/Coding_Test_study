@@ -1,22 +1,25 @@
+from collections import deque
+m = 100001
+res = [0] * m
 N, K = map(int, input().split())
-time = 0
-a = 0
-b = 0
 
-while True:
-    N*=2
-    time+=1
-    if N < K:
-        a = K - N - 1
+def bfs(s, f):
+    queue = deque()
+    queue.append(s)
 
-    elif N > K:
-        b = N - K - 1
-        if b < a:
-            time += b
-            break
-        else:
-            time-=1
-            time+=a
-            break
+    while queue:
+        s = queue.popleft()
+        if s == f:
+            return res[s]
+        for ns in (s-1, s+1, 2*s):
+            if 0 <= ns < m and not res[ns]:
+                res[ns] = res[s] + 1
+                queue.append(ns)
 
-print(time)
+print(bfs(N, K))
+
+
+
+
+
+
